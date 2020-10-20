@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testing</title>
+	
+	<style>
+		*{margin: 0;padding: 0;box-sizing: border-box;}	
+	</style>
+</head>
+<body>
+	<div>
+		<label>Total Number of socks</label>
+		<input id="total-socks" type="number" class="inputs">
+	</div>
+
+	<div>
+		<label>Total Number of socks</label>
+		<textarea id="array-input" rows="2" class="inputs"></textarea>
+	</div>
+	<button id="run-fun" onclick="findPairFun()">Find Pairs</button>
+
+	<div class="result" id="total-pair"></div>
+
+	<script>
+		var n, ar = [], arVal, i, prevVal=0, CurrentVal=0, stack = 0, totalPairSocks = 0;
+
+		function findPairFun(){
+			totalPairSocks = 0;
+			n = document.getElementById('total-socks').value;
+			arVal = document.getElementById('array-input').value;
+			arValSep = arVal.split(' ');
+			if(arValSep.length == n){
+				for(i=0;i<n;i++){
+					ar[i] = arValSep[i];
+				}
+
+				for(i=0;i<n;i++){
+					if(stack == 0){
+						prevVal = ar[i];
+						stack = 1;
+					}else{
+						CurrentVal = ar[i];
+						stack = 0;
+					}
+
+					if(stack == 0){
+						if(prevVal == CurrentVal){
+							totalPairSocks = totalPairSocks+1;
+						}else{
+							prevVal = CurrentVal;
+							stack = 1;
+						}
+					}
+				}
+
+				alert(totalPairSocks);
+			}else{
+				alert('Please insert the correct numbers of value');
+			}
+		}
+	</script>
+</body>
+</html>
